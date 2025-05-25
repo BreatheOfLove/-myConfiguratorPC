@@ -31,7 +31,6 @@
             btnEnterAccount = new Button();
             txtBoxInputPassword = new TextBox();
             txtBoxInputLogin = new TextBox();
-            lblErrorAuthorization = new Label();
             cmbBoxSelectionAuthorization = new ComboBox();
             SuspendLayout();
             // 
@@ -61,18 +60,9 @@
             txtBoxInputLogin.Size = new Size(121, 23);
             txtBoxInputLogin.TabIndex = 6;
             // 
-            // lblErrorAuthorization
-            // 
-            lblErrorAuthorization.AutoSize = true;
-            lblErrorAuthorization.Location = new Point(328, 211);
-            lblErrorAuthorization.Name = "lblErrorAuthorization";
-            lblErrorAuthorization.Size = new Size(58, 15);
-            lblErrorAuthorization.TabIndex = 10;
-            lblErrorAuthorization.Text = "*Ошибка";
-            lblErrorAuthorization.Visible = false;
-            // 
             // cmbBoxSelectionAuthorization
             // 
+            cmbBoxSelectionAuthorization.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbBoxSelectionAuthorization.FormattingEnabled = true;
             cmbBoxSelectionAuthorization.Items.AddRange(new object[] { "Вход", "Регистрация" });
             cmbBoxSelectionAuthorization.Location = new Point(310, 80);
@@ -86,7 +76,6 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
             Controls.Add(cmbBoxSelectionAuthorization);
-            Controls.Add(lblErrorAuthorization);
             Controls.Add(btnEnterAccount);
             Controls.Add(txtBoxInputPassword);
             Controls.Add(txtBoxInputLogin);
@@ -100,7 +89,6 @@
         private Button btnEnterAccount;
         private TextBox txtBoxInputPassword;
         private TextBox txtBoxInputLogin;
-        private Label lblErrorAuthorization;
         private ComboBox cmbBoxSelectionAuthorization;
     }
 }
