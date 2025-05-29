@@ -18,7 +18,7 @@ namespace WinFormsApp9
     {
         public static bool passwordIsLength(string password)
         {
-            return password.Length > 0 && password.Length < 15;
+            return password.Length > 0 && password.Length <= 15;
         }
     }
 }

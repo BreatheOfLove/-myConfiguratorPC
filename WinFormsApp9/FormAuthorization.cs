@@ -31,22 +31,12 @@ namespace WinFormsApp9
 
         private void auth(string userName, bool isAdmin)
         {
-            MainFormUser mainForm = new MainFormUser(userName, isAdmin);
-            mainForm.ShowDialog();
+            if (isAdmin) { MainFormAdmin adminForm = new MainFormAdmin(userName); adminForm.ShowDialog(); }
+            else { MainFormUser userForm = new MainFormUser(userName); userForm.ShowDialog(); }
+            this.Hide();
+            this.Close();
         }
-
-        private bool userHaveInJSON(string usernameInput)
-        {
-            foreach(User user in users)
-            {
-                if(usernameInput == user.Name)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
+    
         private bool authInAccount(string usernameInput, string passwordInput, out bool isAdmin)
         {
             isAdmin = false;
@@ -66,43 +56,23 @@ namespace WinFormsApp9
             string usernameInput = txtBoxInputLogin.Text;
             string passwordInput = txtBoxInputPassword.Text;
 
-            if (cmbBoxSelectionAuthorization.SelectedIndex != -1)
+            if (cmbBoxSelectionAuthorization.SelectedItem.ToString() == "Вход")
             {
-                if (cmbBoxSelectionAuthorization.SelectedItem.ToString() == "Вход")
+                if(authInAccount(usernameInput, passwordInput, out bool isAdmin))
                 {
-                    if(authInAccount(usernameInput, passwordInput, out bool isAdmin))
-                    {
-                        auth(usernameInput, isAdmin);
-                    }
+                    auth(usernameInput, isAdmin);
                 }
-                else if (cmbBoxSelectionAuthorization.SelectedItem.ToString() == "Регистрация")
+            }
+            else if (cmbBoxSelectionAuthorization.SelectedItem.ToString() == "Регистрация")
+            {
+                if (checkLogin.loginIsHave(usernameInput) && checkPassword.passwordIsLength(passwordInput))
                 {
-                    if (checkLogin.loginIsHave(usernameInput) && checkPassword.passwordIsLength(passwordInput))
-                    {
-                        if (!userHaveInJSON(usernameInput))
-                        {
-                            User newUser = new User(usernameInput, passwordInput, false);
-
-                            string jsonStrUser = JsonSerializer.Serialize(newUser, new JsonSerializerOptions { WriteIndented = true });
-
-                            users.Add(newUser);
-                            string json = JsonSerializer.Serialize(users, new JsonSerializerOptions { WriteIndented = true });
-                            File.WriteAllText(filePath, json);
-
-                            MessageBox.Show("Вы зарегистрировались");
-                            auth(txtBoxInputLogin.Text, false);
-
-                            this.Close();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Пользователь с таким логином уже есть");
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Логин или пароль не подходят по длине");
-                    }
+                    User newUser = new User(usernameInput, passwordInput, false);
+                    AddingUser addNewUser = new AddingUser(newUser, filePath, ref users);
+                }
+                else
+                {
+                    MessageBox.Show("Логин или пароль не подходят по длине");
                 }
             }
         }
