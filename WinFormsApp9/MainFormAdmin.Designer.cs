@@ -53,12 +53,13 @@
             // 
             // btnAddNewUser
             // 
-            btnAddNewUser.Location = new Point(43, 34);
+            btnAddNewUser.Location = new Point(34, 28);
             btnAddNewUser.Name = "btnAddNewUser";
-            btnAddNewUser.Size = new Size(108, 23);
+            btnAddNewUser.Size = new Size(148, 23);
             btnAddNewUser.TabIndex = 14;
-            btnAddNewUser.Text = "Создать аккаунт";
+            btnAddNewUser.Text = "Добавить пользователя";
             btnAddNewUser.UseVisualStyleBackColor = true;
+            btnAddNewUser.Click += btnAddNewUser_Click;
             // 
             // MainFormAdmin
             // 
@@ -70,7 +71,6 @@
             Controls.Add(lblHelloText);
             Controls.Add(lblLoginUser);
             Name = "MainFormAdmin";
-            Text = "Панель администратора";
             Load += MainFormAdmin_Load;
             ResumeLayout(false);
             PerformLayout();

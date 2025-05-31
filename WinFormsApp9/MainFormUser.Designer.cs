@@ -59,6 +59,7 @@
             Controls.Add(lblLoginUser);
             Name = "MainFormUser";
             Text = "Панель пользователя";
+            Load += MainFormUser_Load;
             ResumeLayout(false);
             PerformLayout();
         }

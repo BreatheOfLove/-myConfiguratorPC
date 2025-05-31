@@ -17,5 +17,10 @@ namespace WinFormsApp9
             InitializeComponent();
             lblLoginUser.Text = userName;
         }
+
+        private void MainFormUser_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

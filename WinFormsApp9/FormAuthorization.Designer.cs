@@ -81,6 +81,7 @@
             Controls.Add(txtBoxInputLogin);
             Name = "FormAuthorization";
             Text = "Авторизация";
+            Load += FormAuthorization_Load;
             ResumeLayout(false);
             PerformLayout();
         }

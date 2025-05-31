@@ -12,15 +12,25 @@ namespace WinFormsApp9
 {
     public partial class MainFormAdmin : Form
     {
-        public MainFormAdmin(string userName)
+        List<User> userList = new List<User>();
+        string _filePath = "";
+        public MainFormAdmin(string userName, List<User> users, string filePath)
         {
             InitializeComponent();
             lblLoginUser.Text = userName;
+            userList = users; 
+            _filePath = filePath;
         }
 
         private void MainFormAdmin_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnAddNewUser_Click(object sender, EventArgs e)
+        {
+            AddingUserFormInAdminPanelcs addingUserFormInAdminPanelcs = new AddingUserFormInAdminPanelcs(userList, _filePath);
+            addingUserFormInAdminPanelcs.Show(); 
         }
     }
 }

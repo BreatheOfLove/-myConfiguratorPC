@@ -10,34 +10,29 @@ namespace WinFormsApp9
 {
     internal class AddingUser
     {
-        public AddingUser(User user, string filePath, ref List<User> users)
-        {
-            if (!userHaveInJSON(user.Name, users))
+        public AddingUser(User user, ref List<User> users, string filePath)
+        { 
+            if (checkLogin.loginIsHave(user.Name) && checkPassword.passwordIsLength(user.Password))
             {
-                string jsonStrUser = JsonSerializer.Serialize(user, new JsonSerializerOptions { WriteIndented = true });
+                if (!userHaveInBase.userHaveInJSON(user.Name, ref users))
+                {
+                    string jsonStrUser = JsonSerializer.Serialize(user, new JsonSerializerOptions { WriteIndented = true });
 
-                users.Add(user);
-                string json = JsonSerializer.Serialize(users, new JsonSerializerOptions { WriteIndented = true });
-                File.WriteAllText(filePath, json);
+                    users.Add(user);
+                    string json = JsonSerializer.Serialize(users, new JsonSerializerOptions { WriteIndented = true });
+                    File.WriteAllText(filePath, json);
 
-                MessageBox.Show("Вы зарегистрировались");
+                    MessageBox.Show("Успешно");
+                }
+                else
+                {
+                    MessageBox.Show("Пользователь с таким логином уже есть");
+                }
             }
             else
             {
-                MessageBox.Show("Пользователь с таким логином уже есть");
+                MessageBox.Show("Логин или пароль не подходят по длине");
             }
-        }
-
-        private bool userHaveInJSON(string usernameInput, List<User> users)
-        {
-            foreach (User user in users)
-            {
-                if (usernameInput == user.Name)
-                {
-                    return true;
-                }
-            }
-            return false;
         }
     }
 }

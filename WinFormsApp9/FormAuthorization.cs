@@ -12,6 +12,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Text.Encodings.Web;
 using Microsoft.VisualBasic.ApplicationServices;
 using static System.Net.Mime.MediaTypeNames;
+using System.Reflection.Emit;
 
 namespace WinFormsApp9
 {
@@ -25,30 +26,26 @@ namespace WinFormsApp9
             InitializeComponent();
             cmbBoxSelectionAuthorization.SelectedIndex = 0;
 
-            string json = File.ReadAllText(filePath);
-            users = JsonSerializer.Deserialize<List<User>>(json);
+            string jsonUsers = File.ReadAllText(filePath);
+            users = JsonSerializer.Deserialize<List<User>>(jsonUsers);
         }
 
         private void auth(string userName, bool isAdmin)
         {
-            if (isAdmin) { MainFormAdmin adminForm = new MainFormAdmin(userName); adminForm.ShowDialog(); }
-            else { MainFormUser userForm = new MainFormUser(userName); userForm.ShowDialog(); }
-            this.Hide();
-            this.Close();
-        }
-    
-        private bool authInAccount(string usernameInput, string passwordInput, out bool isAdmin)
-        {
-            isAdmin = false;
-            foreach(User user in users)
+            if (isAdmin)
             {
-                if (usernameInput == user.Name && passwordInput == user.Password)
-                {
-                    isAdmin = user.IsAdmin;
-                    return true;
-                }
+                MainFormAdmin myForm = new MainFormAdmin(userName, users, filePath);
+                this.Hide();
+                myForm.ShowDialog();
+                this.Show();
             }
-            return false;
+            else
+            {
+                MainFormUser myForm = new MainFormUser(userName);
+                this.Hide();
+                myForm.ShowDialog();
+                this.Show();
+            }
         }
 
         private void btnEnterAccount_Click(object sender, EventArgs e)
@@ -58,23 +55,25 @@ namespace WinFormsApp9
 
             if (cmbBoxSelectionAuthorization.SelectedItem.ToString() == "Вход")
             {
-                if(authInAccount(usernameInput, passwordInput, out bool isAdmin))
+                if (authInAccount.isAuthInAccount(usernameInput, passwordInput, out bool isAdmin, ref users))
                 {
                     auth(usernameInput, isAdmin);
+                }
+                else
+                {
+                    MessageBox.Show("Неверный логин или пароль");
                 }
             }
             else if (cmbBoxSelectionAuthorization.SelectedItem.ToString() == "Регистрация")
             {
-                if (checkLogin.loginIsHave(usernameInput) && checkPassword.passwordIsLength(passwordInput))
-                {
-                    User newUser = new User(usernameInput, passwordInput, false);
-                    AddingUser addNewUser = new AddingUser(newUser, filePath, ref users);
-                }
-                else
-                {
-                    MessageBox.Show("Логин или пароль не подходят по длине");
-                }
+                User newUser = new User(usernameInput, passwordInput, false);
+                AddingUser addNewUser = new AddingUser(newUser, ref users, filePath);
             }
+        }
+
+        private void FormAuthorization_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
