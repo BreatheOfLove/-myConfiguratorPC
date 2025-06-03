@@ -13,24 +13,28 @@ namespace WinFormsApp9
     public partial class MainFormAdmin : Form
     {
         List<User> userList = new List<User>();
-        string _filePath = "";
-        public MainFormAdmin(string userName, List<User> users, string filePath)
+        string _filePathListUsers = "";
+        string _filePathListProd = "";
+
+        public MainFormAdmin(string userName, List<User> users, string filePathListUsers, string filePathListProd)
         {
             InitializeComponent();
             lblLoginUser.Text = userName;
-            userList = users; 
-            _filePath = filePath;
-        }
-
-        private void MainFormAdmin_Load(object sender, EventArgs e)
-        {
-
+            userList = users;
+            _filePathListUsers = filePathListUsers;
+            _filePathListProd = filePathListProd;
         }
 
         private void btnAddNewUser_Click(object sender, EventArgs e)
         {
-            AddingUserFormInAdminPanelcs addingUserFormInAdminPanelcs = new AddingUserFormInAdminPanelcs(userList, _filePath);
-            addingUserFormInAdminPanelcs.Show(); 
+            AddingUserFormInAdminPanelcs addingUserFormInAdminPanelcs = new AddingUserFormInAdminPanelcs(userList, _filePathListUsers);
+            addingUserFormInAdminPanelcs.Show();
+        }
+
+        private void btnAddAccessories_Click(object sender, EventArgs e)
+        {
+            FormAddAccessories formAddAccessories = new FormAddAccessories(_filePathListProd);
+            formAddAccessories.Show();
         }
     }
 }

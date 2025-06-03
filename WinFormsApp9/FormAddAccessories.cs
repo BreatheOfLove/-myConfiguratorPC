@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,15 +10,19 @@ using System.Windows.Forms;
 
 namespace WinFormsApp9
 {
-    public partial class MainFormUser : Form
+    public partial class FormAddAccessories : Form
     {
         string _filePathListProd = "";
-        
-        public MainFormUser(string userName, string filePathListProd)
+
+        public FormAddAccessories(string filePathListProd)
         {
             InitializeComponent();
-            lblLoginUser.Text = userName;
             _filePathListProd = filePathListProd;
+        }
+
+        private void btnAddProd_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

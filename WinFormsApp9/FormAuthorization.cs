@@ -18,15 +18,17 @@ namespace WinFormsApp9
 {
     public partial class FormAuthorization : Form
     {
-        static string filePath = @"C:\Users\New\Desktop\base.json";
+        static string filePathListUsers = @"C:\Users\New\Desktop\accounts.json";
         List<User> users = new List<User>();
+
+        string filePathListProducts = @"C:\Users\New\Desktop\products.json";
 
         public FormAuthorization()
         {
             InitializeComponent();
             cmbBoxSelectionAuthorization.SelectedIndex = 0;
 
-            string jsonUsers = File.ReadAllText(filePath);
+            string jsonUsers = File.ReadAllText(filePathListUsers);
             users = JsonSerializer.Deserialize<List<User>>(jsonUsers);
         }
 
@@ -34,14 +36,14 @@ namespace WinFormsApp9
         {
             if (isAdmin)
             {
-                MainFormAdmin myForm = new MainFormAdmin(userName, users, filePath);
+                MainFormAdmin myForm = new MainFormAdmin(userName, users, filePathListUsers, filePathListProducts);
                 this.Hide();
                 myForm.ShowDialog();
                 this.Show();
             }
             else
             {
-                MainFormUser myForm = new MainFormUser(userName);
+                MainFormUser myForm = new MainFormUser(userName, filePathListProducts);
                 this.Hide();
                 myForm.ShowDialog();
                 this.Show();
@@ -67,13 +69,8 @@ namespace WinFormsApp9
             else if (cmbBoxSelectionAuthorization.SelectedItem.ToString() == "Регистрация")
             {
                 User newUser = new User(usernameInput, passwordInput, false);
-                AddingUser addNewUser = new AddingUser(newUser, ref users, filePath);
+                AddingUser addNewUser = new AddingUser(newUser, ref users, filePathListUsers);
             }
-        }
-
-        private void FormAuthorization_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }
