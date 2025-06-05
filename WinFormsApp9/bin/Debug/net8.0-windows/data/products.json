@@ -1,0 +1,14 @@
+[
+    {
+        "Type": "Процессор",
+        "Name": "AMD Ryzen 7 7800X3D",
+        "Description": "Мощный крутой процессор от AMD",
+        "Price": 65000
+    },
+    {
+        "Type": "Видеокарта",
+        "Name": "NVIDIA GeForce RTX 4070 SUPER TI",
+        "Description": "Крутое название и мощная видеокарта",
+        "Price": 83000
+    }
+]
