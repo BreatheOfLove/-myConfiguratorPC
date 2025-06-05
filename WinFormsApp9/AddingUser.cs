@@ -16,8 +16,6 @@ namespace WinFormsApp9
             {
                 if (!userHaveInBase.userHaveInJSON(user.Name, ref users))
                 {
-                    string jsonStrUser = JsonSerializer.Serialize(user, new JsonSerializerOptions { WriteIndented = true });
-
                     users.Add(user);
                     string json = JsonSerializer.Serialize(users, new JsonSerializerOptions { WriteIndented = true });
                     File.WriteAllText(filePath, json);

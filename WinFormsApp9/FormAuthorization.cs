@@ -18,36 +18,33 @@ namespace WinFormsApp9
 {
     public partial class FormAuthorization : Form
     {
-        static string filePathListUsers = @"C:\Users\New\Desktop\accounts.json";
+        static string filePathListUsers = @"Data\accounts.json";
         List<User> users = new List<User>();
 
-        string filePathListProducts = @"C:\Users\New\Desktop\products.json";
+        string filePathListProducts = @"Data\products.json";
+        List<Product> products = new List<Product>();
 
         public FormAuthorization()
         {
             InitializeComponent();
             cmbBoxSelectionAuthorization.SelectedIndex = 0;
 
+            pictureBoxBackground.Image = System.Drawing.Image.FromFile(@"Data\1.jpg");
+
             string jsonUsers = File.ReadAllText(filePathListUsers);
             users = JsonSerializer.Deserialize<List<User>>(jsonUsers);
+
+            string jsonProducts = File.ReadAllText(filePathListProducts);
+            products = JsonSerializer.Deserialize<List<Product>>(jsonProducts);
         }
 
         private void auth(string userName, bool isAdmin)
         {
-            if (isAdmin)
-            {
-                MainFormAdmin myForm = new MainFormAdmin(userName, users, filePathListUsers, filePathListProducts);
-                this.Hide();
-                myForm.ShowDialog();
-                this.Show();
-            }
-            else
-            {
-                MainFormUser myForm = new MainFormUser(userName, filePathListProducts);
-                this.Hide();
-                myForm.ShowDialog();
-                this.Show();
-            }
+            Form myForm = isAdmin ? new FormMainAdmin(userName, users, filePathListUsers, products, filePathListProducts)
+                : new FormMainUser(userName, products, filePathListProducts);
+
+            myForm.Show();
+            this.Hide();
         }
 
         private void btnEnterAccount_Click(object sender, EventArgs e)
@@ -71,6 +68,11 @@ namespace WinFormsApp9
                 User newUser = new User(usernameInput, passwordInput, false);
                 AddingUser addNewUser = new AddingUser(newUser, ref users, filePathListUsers);
             }
+        }
+
+        private void FormAuthorization_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
