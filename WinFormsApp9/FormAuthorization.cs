@@ -25,6 +25,9 @@ namespace WinFormsApp9
         string filePathListProducts = @"Data\products.json";
         List<Product> products = new List<Product>();
 
+        string filePathListPromocodes = @"Data\promocodes.json";
+        List<Promocode> promocodes = new List<Promocode>();
+
         public FormAuthorization()
         {
             InitializeComponent();
@@ -39,12 +42,15 @@ namespace WinFormsApp9
 
             string jsonProducts = File.ReadAllText(filePathListProducts);
             products = JsonSerializer.Deserialize<List<Product>>(jsonProducts);
+
+            string jsonPromocodes = File.ReadAllText(filePathListPromocodes);
+            promocodes = JsonSerializer.Deserialize<List<Promocode>>(jsonPromocodes);
         }
 
         private void auth(string userName, bool isAdmin)
         {
-            Form myForm = isAdmin ? new FormMainAdmin(userName, users, filePathListUsers, products, filePathListProducts)
-                : new FormMainUser(userName, products, filePathListProducts);
+            Form myForm = isAdmin ? new FormMainAdmin(userName, users, filePathListUsers, products, filePathListProducts, promocodes, filePathListPromocodes)
+                : new FormMainUser(userName, products, filePathListProducts, promocodes, filePathListPromocodes);
 
             myForm.Show();
             this.Hide();

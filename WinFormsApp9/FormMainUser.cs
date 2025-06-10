@@ -19,7 +19,10 @@ namespace WinFormsApp9
         List<Product> _ShopCartProduct = new List<Product>();
         int _sumProduct = 0;
 
-        public FormMainUser(string userName, List<Product> products, string filePathListProd)
+        List<Promocode> _promocodes = new List<Promocode>();
+        string _filePathListPromocodes = "";
+
+        public FormMainUser(string userName, List<Product> products, string filePathListProd, List<Promocode> promocodes, string filePathListPromocodes)
         {
             InitializeComponent();
             pictureBoxBackground.Image = System.Drawing.Image.FromFile(@"Data\sf.png");
@@ -27,8 +30,11 @@ namespace WinFormsApp9
 
             lblLoginUser.Text = userName;
 
-            _filePathListProd = filePathListProd;
             _products = products;
+            _filePathListProd = filePathListProd;
+
+            _promocodes = promocodes;
+            _filePathListPromocodes = filePathListPromocodes;
         }
 
         private void btnOpenListProducts_Click(object sender, EventArgs e)
@@ -45,7 +51,7 @@ namespace WinFormsApp9
 
         private void btnInputShopCart_Click(object sender, EventArgs e)
         {
-            FormShopCart formShopCart = new FormShopCart(_ShopCartProduct, _sumProduct);
+            FormShopCart formShopCart = new FormShopCart(_ShopCartProduct, _sumProduct, _promocodes, _filePathListPromocodes);
             formShopCart.ShowDialog();
         }
     }

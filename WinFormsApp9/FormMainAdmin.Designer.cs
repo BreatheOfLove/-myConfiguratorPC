@@ -31,8 +31,9 @@
             lblHelloText = new Label();
             lblLoginUser = new Label();
             btnAddNewUser = new Button();
-            btnAddAccessories = new Button();
+            btnAddNewAccessories = new Button();
             pictureBoxBackground = new PictureBox();
+            btnAddNewPromocode = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBoxBackground).BeginInit();
             SuspendLayout();
             // 
@@ -64,15 +65,15 @@
             btnAddNewUser.UseVisualStyleBackColor = true;
             btnAddNewUser.Click += btnAddNewUser_Click;
             // 
-            // btnAddAccessories
+            // btnAddNewAccessories
             // 
-            btnAddAccessories.Location = new Point(277, 141);
-            btnAddAccessories.Name = "btnAddAccessories";
-            btnAddAccessories.Size = new Size(173, 23);
-            btnAddAccessories.TabIndex = 15;
-            btnAddAccessories.Text = "Добавить комплектующие";
-            btnAddAccessories.UseVisualStyleBackColor = true;
-            btnAddAccessories.Click += btnAddAccessories_Click;
+            btnAddNewAccessories.Location = new Point(277, 141);
+            btnAddNewAccessories.Name = "btnAddNewAccessories";
+            btnAddNewAccessories.Size = new Size(173, 23);
+            btnAddNewAccessories.TabIndex = 15;
+            btnAddNewAccessories.Text = "Добавить комплектующие";
+            btnAddNewAccessories.UseVisualStyleBackColor = true;
+            btnAddNewAccessories.Click += btnAddAccessories_Click;
             // 
             // pictureBoxBackground
             // 
@@ -81,7 +82,16 @@
             pictureBoxBackground.Size = new Size(799, 451);
             pictureBoxBackground.TabIndex = 16;
             pictureBoxBackground.TabStop = false;
-            pictureBoxBackground.Click += pictureBoxBackground_Click;
+            // 
+            // btnAddNewPromocode
+            // 
+            btnAddNewPromocode.Location = new Point(277, 170);
+            btnAddNewPromocode.Name = "btnAddNewPromocode";
+            btnAddNewPromocode.Size = new Size(173, 23);
+            btnAddNewPromocode.TabIndex = 17;
+            btnAddNewPromocode.Text = "Создать промокод";
+            btnAddNewPromocode.UseVisualStyleBackColor = true;
+            btnAddNewPromocode.Click += btnAddNewPromocode_Click;
             // 
             // FormMainAdmin
             // 
@@ -89,7 +99,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.WindowFrame;
             ClientSize = new Size(800, 450);
-            Controls.Add(btnAddAccessories);
+            Controls.Add(btnAddNewPromocode);
+            Controls.Add(btnAddNewAccessories);
             Controls.Add(btnAddNewUser);
             Controls.Add(lblHelloText);
             Controls.Add(lblLoginUser);
@@ -98,7 +109,6 @@
             MaximizeBox = false;
             Name = "FormMainAdmin";
             Text = "Панель администратора";
-            Load += FormMainAdmin_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBoxBackground).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -109,7 +119,8 @@
         private Label lblHelloText;
         private Label lblLoginUser;
         private Button btnAddNewUser;
-        private Button btnAddAccessories;
+        private Button btnAddNewAccessories;
         private PictureBox pictureBoxBackground;
+        private Button btnAddNewPromocode;
     }
 }

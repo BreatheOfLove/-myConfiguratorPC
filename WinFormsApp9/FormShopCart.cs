@@ -14,11 +14,18 @@ namespace WinFormsApp9
     {
         List<Product> _shopCartProducts;
         int _sumProd = 0;
-        public FormShopCart(List<Product> shopCartProducts, int sumProd)
+
+        List<Promocode> _promocodes = new List<Promocode>();
+        string _filePathListPromocodes = "";
+        public FormShopCart(List<Product> shopCartProducts, int sumProd, List<Promocode> promocodes, string filePathListPromocodes)
         {
             InitializeComponent();
+
             _shopCartProducts = shopCartProducts;
             _sumProd = sumProd;
+
+            _promocodes = promocodes;
+            _filePathListPromocodes = filePathListPromocodes;
 
             updateSumProducts(sumProd);
 
@@ -30,7 +37,8 @@ namespace WinFormsApp9
 
         private void updateSumProducts(int sumProd)
         {
-            lblSumProducts.Text = sumProd.ToString();
+            double doubleSumProd = Convert.ToDouble(sumProd);
+            lblSumProducts.Text = doubleSumProd.ToString();
         }
 
         private void btnPayProduct_Click(object sender, EventArgs e)
@@ -40,7 +48,7 @@ namespace WinFormsApp9
                 FormPayProducts formPayProducts = new FormPayProducts();
                 formPayProducts.ShowDialog();
 
-                if(formPayProducts.getIsPay())
+                if (formPayProducts.getIsPay())
                 {
                     int deleteSelectedIndex = listBoxShopCart.SelectedIndex;
                     int deletePrice = _shopCartProducts[listBoxShopCart.SelectedIndex].Price;
@@ -50,7 +58,7 @@ namespace WinFormsApp9
                     _sumProd -= deletePrice;
                     updateSumProducts(_sumProd);
 
-                    if(listBoxShopCart.Items.Count == 0)
+                    if (listBoxShopCart.Items.Count == 0)
                     {
                         MessageBox.Show("Будем ждать вас ещё");
                         Application.Exit();
@@ -65,7 +73,7 @@ namespace WinFormsApp9
 
         private void btnPayAllProducts_Click(object sender, EventArgs e)
         {
-            if(_sumProd > 0)
+            if (_sumProd > 0)
             {
                 FormPayProducts formPayProducts = new FormPayProducts();
                 formPayProducts.ShowDialog();
@@ -81,6 +89,43 @@ namespace WinFormsApp9
             {
                 MessageBox.Show("Ваша корзина пуста (((((");
             }
+        }
+
+        private void btnDeleteProd_Click(object sender, EventArgs e)
+        {
+            if (listBoxShopCart.SelectedIndex >= 0)
+            {
+                int deleteSelectedIndex = listBoxShopCart.SelectedIndex;
+                int deletePrice = _shopCartProducts[listBoxShopCart.SelectedIndex].Price;
+
+                _sumProd -= deletePrice;
+                _shopCartProducts.RemoveAt(deleteSelectedIndex);zAZ
+                listBoxShopCart.Items.RemoveAt(deleteSelectedIndex);
+                updateSumProducts(_sumProd);
+                MessageBox.Show("Товар удалён из корзины");
+            }
+            else
+            {
+                MessageBox.Show("Не выбран товар");
+            }
+        }
+
+        private void btnInputPromocode_Click(object sender, EventArgs e)
+        {
+            foreach(var promocode in _promocodes)
+            {
+                if(promocode.Promo == txtBoxPromocode.Text)
+                {
+                    _sumProd = (int)(_sumProd * (1 - (double)promocode.Discount / 100));
+
+                    updateSumProducts(_sumProd);
+                    lblDiscountAmonut.Text = promocode.Discount.ToString();
+                    MessageBox.Show("Промокод применён");
+
+                    return;
+                }
+            }
+            MessageBox.Show("Такого промокода нет");
         }
     }
 }

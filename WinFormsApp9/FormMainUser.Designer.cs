@@ -66,7 +66,7 @@
             // 
             // btnInputShopCart
             // 
-            btnInputShopCart.Location = new Point(243, 178);
+            btnInputShopCart.Location = new Point(243, 167);
             btnInputShopCart.Name = "btnInputShopCart";
             btnInputShopCart.Size = new Size(156, 23);
             btnInputShopCart.TabIndex = 14;

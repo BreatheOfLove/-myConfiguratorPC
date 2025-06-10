@@ -19,7 +19,10 @@ namespace WinFormsApp9
         List<Product> _products = new List<Product>();
         string _filePathListProd = "";
 
-        public FormMainAdmin(string userName, List<User> users, string filePathListUsers, List<Product> products, string filePathListProd)
+        List<Promocode> _promocodes = new List<Promocode>();
+        string _filePathListPromocodes = "";
+
+        public FormMainAdmin(string userName, List<User> users, string filePathListUsers, List<Product> products, string filePathListProd, List<Promocode> promocodes, string filePathListPromocodes)
         {
             InitializeComponent();
 
@@ -32,6 +35,9 @@ namespace WinFormsApp9
 
             _products = products;
             _filePathListProd = filePathListProd;
+
+            _promocodes = promocodes;
+            _filePathListPromocodes = filePathListPromocodes;
         }
 
         private void btnAddNewUser_Click(object sender, EventArgs e)
@@ -46,14 +52,10 @@ namespace WinFormsApp9
             formAddAccessories.Show();
         }
 
-        private void pictureBoxBackground_Click(object sender, EventArgs e)
+        private void btnAddNewPromocode_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void FormMainAdmin_Load(object sender, EventArgs e)
-        {
-
+            FormAddPromocode formAddPromocode = new FormAddPromocode(_promocodes, _filePathListPromocodes);
+            formAddPromocode.Show();
         }
     }
 }

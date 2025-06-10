@@ -59,6 +59,8 @@
             // 
             // txtBoxInputLogin
             // 
+            txtBoxInputLogin.BackColor = SystemColors.Window;
+            txtBoxInputLogin.ForeColor = SystemColors.WindowText;
             txtBoxInputLogin.Location = new Point(371, 172);
             txtBoxInputLogin.Name = "txtBoxInputLogin";
             txtBoxInputLogin.PlaceholderText = "Логин";
