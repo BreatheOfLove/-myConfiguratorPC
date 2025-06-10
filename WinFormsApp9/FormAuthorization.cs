@@ -13,6 +13,7 @@ using System.Text.Encodings.Web;
 using Microsoft.VisualBasic.ApplicationServices;
 using static System.Net.Mime.MediaTypeNames;
 using System.Reflection.Emit;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolBar;
 
 namespace WinFormsApp9
 {
@@ -30,6 +31,8 @@ namespace WinFormsApp9
             cmbBoxSelectionAuthorization.SelectedIndex = 0;
 
             pictureBoxBackground.Image = System.Drawing.Image.FromFile(@"Data\1.jpg");
+
+            this.AcceptButton = btnEnterAccount;
 
             string jsonUsers = File.ReadAllText(filePathListUsers);
             users = JsonSerializer.Deserialize<List<User>>(jsonUsers);

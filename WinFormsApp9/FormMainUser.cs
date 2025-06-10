@@ -16,6 +16,9 @@ namespace WinFormsApp9
         List<Product> _products = new List<Product>();
         string _filePathListProd = "";
 
+        List<Product> _ShopCartProduct = new List<Product>();
+        int _sumProduct = 0;
+
         public FormMainUser(string userName, List<Product> products, string filePathListProd)
         {
             InitializeComponent();
@@ -32,7 +35,18 @@ namespace WinFormsApp9
         {
             FormUserListProduct formUserListProduct = new FormUserListProduct(_products);
             formUserListProduct.ShowDialog();
+
+            List<Product> selectedProducts = formUserListProduct.getShopCartProducts();
+            int addedSum = formUserListProduct.getSumProducts();
+
+            _ShopCartProduct.AddRange(selectedProducts);
+            _sumProduct += addedSum;
         }
 
+        private void btnInputShopCart_Click(object sender, EventArgs e)
+        {
+            FormShopCart formShopCart = new FormShopCart(_ShopCartProduct, _sumProduct);
+            formShopCart.ShowDialog();
+        }
     }
 }

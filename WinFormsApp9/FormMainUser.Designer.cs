@@ -31,8 +31,8 @@
             lblLoginUser = new Label();
             lblHelloText = new Label();
             btnOpenListProducts = new Button();
-            pictureBoxBackground = new PictureBox();
             btnInputShopCart = new Button();
+            pictureBoxBackground = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBoxBackground).BeginInit();
             SuspendLayout();
             // 
@@ -64,14 +64,6 @@
             btnOpenListProducts.UseVisualStyleBackColor = true;
             btnOpenListProducts.Click += btnOpenListProducts_Click;
             // 
-            // pictureBoxBackground
-            // 
-            pictureBoxBackground.Location = new Point(-2, 0);
-            pictureBoxBackground.Name = "pictureBoxBackground";
-            pictureBoxBackground.Size = new Size(800, 450);
-            pictureBoxBackground.TabIndex = 13;
-            pictureBoxBackground.TabStop = false;
-            // 
             // btnInputShopCart
             // 
             btnInputShopCart.Location = new Point(243, 178);
@@ -80,6 +72,15 @@
             btnInputShopCart.TabIndex = 14;
             btnInputShopCart.Text = "Корзина";
             btnInputShopCart.UseVisualStyleBackColor = true;
+            btnInputShopCart.Click += btnInputShopCart_Click;
+            // 
+            // pictureBoxBackground
+            // 
+            pictureBoxBackground.Location = new Point(0, 0);
+            pictureBoxBackground.Name = "pictureBoxBackground";
+            pictureBoxBackground.Size = new Size(799, 452);
+            pictureBoxBackground.TabIndex = 15;
+            pictureBoxBackground.TabStop = false;
             // 
             // FormMainUser
             // 
@@ -105,7 +106,7 @@
         private Label lblLoginUser;
         private Label lblHelloText;
         private Button btnOpenListProducts;
-        private PictureBox pictureBoxBackground;
         private Button btnInputShopCart;
+        private PictureBox pictureBoxBackground;
     }
 }
