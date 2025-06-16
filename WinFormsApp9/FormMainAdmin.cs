@@ -22,7 +22,7 @@ namespace WinFormsApp9
         List<Promocode> _promocodes = new List<Promocode>();
         string _filePathListPromocodes = "";
 
-        public FormMainAdmin(string userName, List<User> users, string filePathListUsers, List<Product> products, string filePathListProd, List<Promocode> promocodes, string filePathListPromocodes)
+        public FormMainAdmin(string userName, string userCity, string weather, List<User> users, string filePathListUsers, List<Product> products, string filePathListProd, List<Promocode> promocodes, string filePathListPromocodes)
         {
             InitializeComponent();
 
@@ -38,6 +38,8 @@ namespace WinFormsApp9
 
             _promocodes = promocodes;
             _filePathListPromocodes = filePathListPromocodes;
+
+            lblTextWeaher.Text = $"В {userCity}е сейчас {weather}°";
         }
 
         private void btnAddNewUser_Click(object sender, EventArgs e)

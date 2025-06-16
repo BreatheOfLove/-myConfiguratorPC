@@ -10,19 +10,22 @@ namespace WinFormsApp9
 {
     public class User
     {
-        public User(string name, string password, bool isAdmin)
+        public User(string name, string passwordHash, string city, bool isAdmin)
         {
             _name = name;
-            _password = password;
+            _passwordHash = passwordHash;
+            _city = city;
             _isAdmin = isAdmin;
         }
 
         private string _name;
-        private string _password;
+        private string _passwordHash;
+        private string _city;
         private bool _isAdmin;
 
         public string Name { get { return _name; } }
-        public string Password { get { return _password; } }
+        public string PasswordHash { get { return _passwordHash; } }
+        public string City { get { return _city; } }
         public bool IsAdmin { get { return _isAdmin; } }
     }
 }

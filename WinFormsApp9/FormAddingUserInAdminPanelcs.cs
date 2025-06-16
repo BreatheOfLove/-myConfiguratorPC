@@ -27,11 +27,17 @@ namespace WinFormsApp9
         {
             string userName = txtBoxInputLogin.Text;
             string password = txtBoxInputPassword.Text;
+            string city = comboBoxCity.SelectedItem.ToString();
             bool isAdmin = cmbBoxIsAdmin.SelectedItem.ToString() == "Администратор" ? true : false;
-
-            User newUser = new User(userName, password, isAdmin);
-
-            AddingUser addingUser = new AddingUser(newUser, ref _userList, _filePath);
+            if (userName != string.Empty && password != string.Empty && city != string.Empty)
+            {
+                User newUser = new User(userName, password, city, isAdmin);
+                AddingUser.addNewUser(newUser, ref _userList, _filePath);
+            }
+            else
+            {
+                MessageBox.Show("Не все поля заполнены");
+            }
         }
     }
 }
