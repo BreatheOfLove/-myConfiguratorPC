@@ -67,12 +67,19 @@ namespace WinFormsApp9
 
         private async Task auth(string userName, string city, bool isAdmin)
         {
-            string weather = await findWeather(city);
-            this.Hide();
-            Form myForm = isAdmin ? new FormMainAdmin(userName, city, weather, users, filePathListUsers, products, filePathListProducts, promocodes, filePathListPromocodes)
-                : new FormMainUser(userName, city, weather, products, filePathListProducts, promocodes, filePathListPromocodes);
-            myForm.FormClosed += (s, e) => Environment.Exit(0);
-            myForm.Show();
+            try
+            {
+                string weather = await findWeather(city);
+                this.Hide();
+                Form myForm = isAdmin ? new FormMainAdmin(userName, city, weather, users, filePathListUsers, products, filePathListProducts, promocodes, filePathListPromocodes)
+                    : new FormMainUser(userName, city, weather, products, filePathListProducts, promocodes, filePathListPromocodes);
+                myForm.FormClosed += (s, e) => Environment.Exit(0);
+                myForm.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnEnterAccount_Click(object sender, EventArgs e)
