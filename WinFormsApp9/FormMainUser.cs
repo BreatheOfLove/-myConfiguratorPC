@@ -25,7 +25,7 @@ namespace WinFormsApp9
         public FormMainUser(string userName, string userCity, string weather, List<Product> products, string filePathListProd, List<Promocode> promocodes, string filePathListPromocodes)
         {
             InitializeComponent();
-            pictureBoxBackground.Image = System.Drawing.Image.FromFile(@"Data\sf.png");
+            pictureBoxBackground.Image = System.Drawing.Image.FromFile(@"Data\yae.jpg");
             pictureBoxBackground.SizeMode = PictureBoxSizeMode.Zoom;
 
             lblLoginUser.Text = userName;
