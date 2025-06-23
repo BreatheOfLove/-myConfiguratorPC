@@ -2,13 +2,22 @@
   {
     "Name": "1",
     "PasswordHash": "6B86B273FF34FCE19D6B804EFF5A3F5747ADA4EAA22F1D49C01E52DDB7875B4B",
-    "City": "Санкт-Петербург",
-    "IsAdmin": false
+    "City": "Москва",
+    "IsAdmin": false,
+    "Purchases": [
+      {
+        "Type": "Процессор",
+        "Name": "AMD Ryzen 7 7800X3D",
+        "Description": "топ",
+        "Price": 49999
+      }
+    ]
   },
   {
     "Name": "2",
     "PasswordHash": "D4735E3A265E16EEE03F59718B9B5D03019C07D8B6C51F90DA3A666EEC13AB35",
     "City": "Красноярск",
-    "IsAdmin": true
+    "IsAdmin": true,
+    "Purchases": []
   }
 ]
