@@ -16,30 +16,30 @@ namespace WinFormsApp9
         List<User> _users = new List<User>();
         string _filePathListUsers = "";
 
-        List<Product> _products = new List<Product>();
-        string _filePathListProd = "";
+        List<Accessories> _accessories = new List<Accessories>();
+        string _filePathListAccessories = "";
 
         List<Promocode> _promocodes = new List<Promocode>();
         string _filePathListPromocodes = "";
 
-        public FormMainAdmin(string userName, string userCity, string weather, List<User> users, string filePathListUsers, List<Product> products, string filePathListProd, List<Promocode> promocodes, string filePathListPromocodes)
+        public FormMainAdmin(User user, string weather, List<User> users, string filePathListUsers, List<Accessories> accessories, string filePathListAccessories, List<Promocode> promocodes, string filePathListPromocodes)
         {
             InitializeComponent();
 
             pictureBoxBackground.Image = System.Drawing.Image.FromFile(@"Data\arle.png");
             pictureBoxBackground.SizeMode = PictureBoxSizeMode.Zoom;
 
-            lblLoginUser.Text = userName;
+            lblLoginUser.Text = user.Name;
             _users = users;
             _filePathListUsers = filePathListUsers;
 
-            _products = products;
-            _filePathListProd = filePathListProd;
+            _accessories = accessories;
+            _filePathListAccessories = filePathListAccessories;
 
             _promocodes = promocodes;
             _filePathListPromocodes = filePathListPromocodes;
 
-            lblTextWeaher.Text = $"В {userCity}е сейчас {weather}°";
+            lblTextWeaher.Text = $"В {user.City} сейчас {weather}°";
         }
 
         private void btnAddNewUser_Click(object sender, EventArgs e)
@@ -50,7 +50,7 @@ namespace WinFormsApp9
 
         private void btnAddAccessories_Click(object sender, EventArgs e)
         {
-            FormAddAccessories formAddAccessories = new FormAddAccessories(_products, _filePathListProd);
+            FormAddAccessories formAddAccessories = new FormAddAccessories(_accessories, _filePathListAccessories);
             formAddAccessories.Show();
         }
 

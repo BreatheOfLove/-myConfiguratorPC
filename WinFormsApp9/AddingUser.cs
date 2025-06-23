@@ -1,35 +1,29 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.ApplicationServices;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Microsoft.VisualBasic.ApplicationServices;
 
 namespace WinFormsApp9
 {
-    internal class AddingUser
+    static class AddingUser
     {
-        public AddingUser(User user, ref List<User> users, string filePath)
-        { 
-            if (checkLogin.loginIsHave(user.Name) && checkPassword.passwordIsLength(user.Password))
+        static public void addNewUser(User user, ref List<User> users, string filePath)
+        {
+            if (!userHaveInBase.userHaveInJSON(user.Name, ref users))
             {
-                if (!userHaveInBase.userHaveInJSON(user.Name, ref users))
-                {
-                    users.Add(user);
-                    string json = JsonSerializer.Serialize(users, new JsonSerializerOptions { WriteIndented = true });
-                    File.WriteAllText(filePath, json);
+                users.Add(user);
+                string json = JsonSerializer.Serialize(users, new JsonSerializerOptions { WriteIndented = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping });
+                File.WriteAllText(filePath, json);
 
-                    MessageBox.Show("Успешно");
-                }
-                else
-                {
-                    MessageBox.Show("Пользователь с таким логином уже есть");
-                }
+                MessageBox.Show("Аккаунт успешно создан.");
             }
             else
             {
-                MessageBox.Show("Логин или пароль не подходят по длине");
+                MessageBox.Show("Пользователь с таким логином уже есть");
             }
         }
     }

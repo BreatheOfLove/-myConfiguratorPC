@@ -23,11 +23,11 @@ namespace WinFormsApp9
 {
     public partial class FormAuthorization : Form
     {
-        static string filePathListUsers = @"Data\accounts.json";
+        string filePathListUsers = @"Data\accounts.json";
         List<User> users = new List<User>();
 
-        string filePathListProducts = @"Data\products.json";
-        List<Product> products = new List<Product>();
+        string filePathListProducts = @"Data\accessories.json";
+        List<Accessories> accessories = new List<Accessories>();
 
         string filePathListPromocodes = @"Data\promocodes.json";
         List<Promocode> promocodes = new List<Promocode>();
@@ -36,6 +36,7 @@ namespace WinFormsApp9
         {
             InitializeComponent();
             cmbBoxSelectionAuthorization.SelectedIndex = 0;
+            txtBoxInputPassword.PasswordChar = '*';
             pictureBoxBackground.Image = System.Drawing.Image.FromFile(@"Data\1.jpg");
 
             this.AcceptButton = btnEnterAccount;
@@ -43,8 +44,8 @@ namespace WinFormsApp9
             string jsonUsers = File.ReadAllText(filePathListUsers);
             users = System.Text.Json.JsonSerializer.Deserialize<List<User>>(jsonUsers);
 
-            string jsonProducts = File.ReadAllText(filePathListProducts);
-            products = System.Text.Json.JsonSerializer.Deserialize<List<Product>>(jsonProducts);
+            string jsonAccessories = File.ReadAllText(filePathListProducts);
+            accessories = System.Text.Json.JsonSerializer.Deserialize<List<Accessories>>(jsonAccessories);
 
             string jsonPromocodes = File.ReadAllText(filePathListPromocodes);
             promocodes = System.Text.Json.JsonSerializer.Deserialize<List<Promocode>>(jsonPromocodes);
@@ -65,14 +66,15 @@ namespace WinFormsApp9
             return temp.ToString();
         }
 
-        private async Task auth(string userName, string city, bool isAdmin)
+        private async Task auth(User user)
         {
             try
             {
-                string weather = await findWeather(city);
+                string weather = await findWeather(user.City);
+
                 this.Hide();
-                Form myForm = isAdmin ? new FormMainAdmin(userName, city, weather, users, filePathListUsers, products, filePathListProducts, promocodes, filePathListPromocodes)
-                    : new FormMainUser(userName, city, weather, products, filePathListProducts, promocodes, filePathListPromocodes);
+                Form myForm = user.IsAdmin ? new FormMainAdmin(user, weather, users, filePathListUsers, accessories, filePathListProducts, promocodes, filePathListPromocodes)
+                    : new FormMainUser(user, users, filePathListUsers, weather, accessories, filePathListProducts, promocodes, filePathListPromocodes);
                 myForm.FormClosed += (s, e) => Environment.Exit(0);
                 myForm.Show();
             }
@@ -89,9 +91,11 @@ namespace WinFormsApp9
 
             if (cmbBoxSelectionAuthorization.SelectedItem.ToString() == "Вход")
             {
-                if (authInAccount.isAuthInAccount(usernameInput, passwordInput, out string city, out bool isAdmin, ref users))
+                User authorizedUser = authInAccount.isAuthInAccount(usernameInput, passwordInput, ref users);
+
+                if (authorizedUser != null)
                 {
-                    auth(usernameInput, city, isAdmin);
+                    auth(authorizedUser);
                 }
                 else
                 {
@@ -100,10 +104,11 @@ namespace WinFormsApp9
             }
             else if (cmbBoxSelectionAuthorization.SelectedItem.ToString() == "Регистрация")
             {
-                string cityInput = comboBoxCity.SelectedItem.ToString();
-                if (usernameInput != string.Empty && passwordInput != string.Empty && cityInput != string.Empty)
+                if (usernameInput != string.Empty && passwordInput != string.Empty && comboBoxCity.SelectedItem != null)
                 {
-                    User newUser = new User(usernameInput, hashPass.GetHashSHA256(passwordInput), cityInput, false);
+                    string cityInput = comboBoxCity.SelectedItem.ToString();
+                    List<Accessories> purchaseHistory = new List<Accessories>();
+                    User newUser = new User(usernameInput, hashPass.GetHashSHA256(passwordInput), cityInput, false, purchaseHistory);
                     AddingUser.addNewUser(newUser, ref users, filePathListUsers);
                 }
                 else

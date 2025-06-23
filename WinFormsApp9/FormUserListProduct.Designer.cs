@@ -38,9 +38,9 @@
             // 
             listBoxProducts.FormattingEnabled = true;
             listBoxProducts.ItemHeight = 15;
-            listBoxProducts.Location = new Point(39, 12);
+            listBoxProducts.Location = new Point(12, 12);
             listBoxProducts.Name = "listBoxProducts";
-            listBoxProducts.Size = new Size(681, 394);
+            listBoxProducts.Size = new Size(776, 394);
             listBoxProducts.TabIndex = 0;
             // 
             // btnAddProdShopCart
@@ -56,7 +56,7 @@
             // lblSumProducts
             // 
             lblSumProducts.AutoSize = true;
-            lblSumProducts.Location = new Point(628, 423);
+            lblSumProducts.Location = new Point(647, 426);
             lblSumProducts.Name = "lblSumProducts";
             lblSumProducts.Size = new Size(13, 15);
             lblSumProducts.TabIndex = 2;
@@ -65,11 +65,11 @@
             // lblTextSumProd
             // 
             lblTextSumProd.AutoSize = true;
-            lblTextSumProd.Location = new Point(574, 423);
+            lblTextSumProd.Location = new Point(545, 426);
             lblTextSumProd.Name = "lblTextSumProd";
-            lblTextSumProd.Size = new Size(48, 15);
+            lblTextSumProd.Size = new Size(96, 15);
             lblTextSumProd.TabIndex = 3;
-            lblTextSumProd.Text = "Сумма:";
+            lblTextSumProd.Text = "Текущая сумма:";
             // 
             // FormUserListProduct
             // 

@@ -34,6 +34,7 @@
             btnAddNewAccessories = new Button();
             pictureBoxBackground = new PictureBox();
             btnAddNewPromocode = new Button();
+            lblTextWeaher = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBoxBackground).BeginInit();
             SuspendLayout();
             // 
@@ -77,7 +78,7 @@
             // 
             // pictureBoxBackground
             // 
-            pictureBoxBackground.Location = new Point(0, 0);
+            pictureBoxBackground.Location = new Point(0, -1);
             pictureBoxBackground.Name = "pictureBoxBackground";
             pictureBoxBackground.Size = new Size(799, 451);
             pictureBoxBackground.TabIndex = 16;
@@ -93,12 +94,22 @@
             btnAddNewPromocode.UseVisualStyleBackColor = true;
             btnAddNewPromocode.Click += btnAddNewPromocode_Click;
             // 
+            // lblTextWeaher
+            // 
+            lblTextWeaher.AutoSize = true;
+            lblTextWeaher.Location = new Point(614, 36);
+            lblTextWeaher.Name = "lblTextWeaher";
+            lblTextWeaher.Size = new Size(86, 15);
+            lblTextWeaher.TabIndex = 18;
+            lblTextWeaher.Text = "В * сейчас 0.0°";
+            // 
             // FormMainAdmin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.WindowFrame;
             ClientSize = new Size(800, 450);
+            Controls.Add(lblTextWeaher);
             Controls.Add(btnAddNewPromocode);
             Controls.Add(btnAddNewAccessories);
             Controls.Add(btnAddNewUser);
@@ -122,5 +133,6 @@
         private Button btnAddNewAccessories;
         private PictureBox pictureBoxBackground;
         private Button btnAddNewPromocode;
+        private Label lblTextWeaher;
     }
 }

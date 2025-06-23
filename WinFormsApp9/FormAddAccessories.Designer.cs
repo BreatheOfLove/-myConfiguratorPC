@@ -49,7 +49,7 @@
             // 
             cmbBoxTypeProd.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbBoxTypeProd.FormattingEnabled = true;
-            cmbBoxTypeProd.Items.AddRange(new object[] { "Процессор", "Видеокарта", "Оперативная память", "Материнская плата", "Блок питания", "Корпус", "SSD", "SSD M.2", "HDD", "Охлаждение", "Монитор" });
+            cmbBoxTypeProd.Items.AddRange(new object[] { "Процессор", "Видеокарта", "Оперативная память", "Материнская плата", "Блок питания", "SSD" });
             cmbBoxTypeProd.Location = new Point(190, 31);
             cmbBoxTypeProd.Name = "cmbBoxTypeProd";
             cmbBoxTypeProd.Size = new Size(333, 23);

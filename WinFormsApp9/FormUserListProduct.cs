@@ -12,28 +12,28 @@ namespace WinFormsApp9
 {
     public partial class FormUserListProduct : Form
     {
-        List<Product> _products;
-        List<Product> _shopCartProducts = new List<Product>();
-        int _sumProducts = 0;
+        List<Accessories> _acessories;
+        List<Accessories> _shopCartAcessories = new List<Accessories>();
+        int _sumAcessories = 0;
 
-        public List<Product> getShopCartProducts()
+        public List<Accessories> getShopCartProducts()
         {
-            return _shopCartProducts;
+            return _shopCartAcessories;
         }
 
         public int getSumProducts()
         {
-            return _sumProducts;
+            return _sumAcessories;
         }
 
-        public FormUserListProduct(List<Product> products)
+        public FormUserListProduct(List<Accessories> accessories)
         {
             InitializeComponent();
-            _products = products;
+            _acessories = accessories;
 
-            foreach (var product in products)
+            foreach (var accessorie in accessories)
             {
-                listBoxProducts.Items.Add($"Тип: {product.Type}, название: {product.Name}, описание: {product.Description}, цена: {product.Price}");
+                listBoxProducts.Items.Add($"Тип: {accessorie.Type}, название: {accessorie.Name}, описание: {accessorie.Description}, цена: {accessorie.Price}");
             }
         }
 
@@ -41,10 +41,10 @@ namespace WinFormsApp9
         {
             if(listBoxProducts.SelectedIndex > -1)
             {
-                _shopCartProducts.Add(_products[listBoxProducts.SelectedIndex]);
-                _sumProducts += _products[listBoxProducts.SelectedIndex].Price;
+                _shopCartAcessories.Add(_acessories[listBoxProducts.SelectedIndex]);
+                _sumAcessories += _acessories[listBoxProducts.SelectedIndex].Price;
                 MessageBox.Show("Товар добавлен");
-                lblSumProducts.Text = _sumProducts.ToString();
+                lblSumProducts.Text = _sumAcessories.ToString();
             }
             else
             {

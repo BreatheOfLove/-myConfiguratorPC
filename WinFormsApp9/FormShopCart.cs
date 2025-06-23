@@ -1,10 +1,13 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.ApplicationServices;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.Encodings.Web;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -12,33 +15,80 @@ namespace WinFormsApp9
 {
     public partial class FormShopCart : Form
     {
-        List<Product> _shopCartProducts;
-        int _sumProd = 0;
-
-        List<Promocode> _promocodes = new List<Promocode>();
-        string _filePathListPromocodes = "";
-        public FormShopCart(List<Product> shopCartProducts, int sumProd, List<Promocode> promocodes, string filePathListPromocodes)
+        public FormShopCart(User user, List<User> users, string filePathListUsers ,List<Accessories> shopCartAccessories, int sumProd, List<Promocode> promocodes, string filePathListPromocodes)
         {
             InitializeComponent();
 
-            _shopCartProducts = shopCartProducts;
-            _sumProd = sumProd;
+            _user = user;
+
+            _users = users;
+            _filePathListUsers = filePathListUsers;
+
+            _shopCartAccessories = shopCartAccessories;
+            _sumAccessories = sumProd;
 
             _promocodes = promocodes;
             _filePathListPromocodes = filePathListPromocodes;
 
-            updateSumProducts(sumProd);
 
-            foreach (var product in _shopCartProducts)
+            updateSumAccessories(sumProd);
+
+            foreach (var accessories in _shopCartAccessories)
             {
-                listBoxShopCart.Items.Add($"Тип: {product.Type}, название: {product.Name}, описание: {product.Description}, цена: {product.Price}");
+                listBoxShopCart.Items.Add($"Тип: {accessories.Type}, название: {accessories.Name}, описание: {accessories.Description}, цена: {accessories.Price}");
             }
         }
 
-        private void updateSumProducts(int sumProd)
+        string _filePathListUsers = "";
+        List<User> _users = new List<User>();
+
+        List<Accessories> _shopCartAccessories;
+        int _sumAccessories = 0;
+
+        List<Promocode> _promocodes = new List<Promocode>();
+        string _filePathListPromocodes = "";
+
+        int _sumAccessoriesWithDiscount = 0;
+
+        User _user;
+
+        public void SaveUsersToFile()
         {
-            double doubleSumProd = Convert.ToDouble(sumProd);
-            lblSumProducts.Text = doubleSumProd.ToString();
+            var json = JsonSerializer.Serialize(_users, new JsonSerializerOptions { WriteIndented = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping });
+            File.WriteAllText(_filePathListUsers, json);
+        }
+
+        private void updateSumAccessories(int sumProd)
+        {
+            lblSumProducts.Text = sumProd.ToString();
+        }
+
+        private void updateSumWithAccessories(int sumWithDiscountProd)
+        {
+            if(sumWithDiscountProd > 0)
+            {
+                double doubleSumProdWithDiscount = Convert.ToDouble(sumWithDiscountProd);
+                lblSumProductsWithDiscount.Text = doubleSumProdWithDiscount.ToString();
+            }
+            else
+            {
+                lblSumProducts.Font = new Font(lblSumProducts.Font, FontStyle.Regular);
+                lblSumProductsWithDiscount.Text = string.Empty;
+            }
+        }
+
+        private void sumAccessoriesIsNull()
+        {
+            if (_sumAccessories <= 0)
+            {
+                _sumAccessoriesWithDiscount = 0;
+                updateSumWithAccessories(_sumAccessoriesWithDiscount);
+            }
+        }
+
+        public int getSumShopCarts()
+        {
+            return _sumAccessories;
         }
 
         private void btnPayProduct_Click(object sender, EventArgs e)
@@ -51,12 +101,15 @@ namespace WinFormsApp9
                 if (formPayProducts.getIsPay())
                 {
                     int deleteSelectedIndex = listBoxShopCart.SelectedIndex;
-                    int deletePrice = _shopCartProducts[listBoxShopCart.SelectedIndex].Price;
+                    int deletePrice = _shopCartAccessories[listBoxShopCart.SelectedIndex].Price;
 
-                    _shopCartProducts.RemoveAt(deleteSelectedIndex);
+                    _user.Purchases.Add(_shopCartAccessories[deleteSelectedIndex]);
+                    SaveUsersToFile();
+
+                    _shopCartAccessories.RemoveAt(deleteSelectedIndex);
                     listBoxShopCart.Items.RemoveAt(deleteSelectedIndex);
-                    _sumProd -= deletePrice;
-                    updateSumProducts(_sumProd);
+                    _sumAccessories -= deletePrice;
+                    updateSumAccessories(_sumAccessories);
 
                     if (listBoxShopCart.Items.Count == 0)
                     {
@@ -73,15 +126,15 @@ namespace WinFormsApp9
 
         private void btnPayAllProducts_Click(object sender, EventArgs e)
         {
-            if (_sumProd > 0)
+            if (_sumAccessories > 0)
             {
                 FormPayProducts formPayProducts = new FormPayProducts();
                 formPayProducts.ShowDialog();
 
                 if (formPayProducts.getIsPay())
                 {
-                    _shopCartProducts.Clear();
-                    _sumProd = 0;
+                    _shopCartAccessories.Clear();
+                    _sumAccessories = 0;
                     Application.Exit();
                 }
             }
@@ -96,13 +149,15 @@ namespace WinFormsApp9
             if (listBoxShopCart.SelectedIndex >= 0)
             {
                 int deleteSelectedIndex = listBoxShopCart.SelectedIndex;
-                int deletePrice = _shopCartProducts[listBoxShopCart.SelectedIndex].Price;
+                int deletePrice = _shopCartAccessories[listBoxShopCart.SelectedIndex].Price;
 
-                _sumProd -= deletePrice;
-                _shopCartProducts.RemoveAt(deleteSelectedIndex);zAZ
+                _sumAccessories -= deletePrice;
+                _shopCartAccessories.RemoveAt(deleteSelectedIndex);
                 listBoxShopCart.Items.RemoveAt(deleteSelectedIndex);
-                updateSumProducts(_sumProd);
+                updateSumAccessories(_sumAccessories);
                 MessageBox.Show("Товар удалён из корзины");
+
+                sumAccessoriesIsNull();
             }
             else
             {
@@ -116,10 +171,12 @@ namespace WinFormsApp9
             {
                 if(promocode.Promo == txtBoxPromocode.Text)
                 {
-                    _sumProd = (int)(_sumProd * (1 - (double)promocode.Discount / 100));
+                    _sumAccessoriesWithDiscount= (int)(_sumAccessories * (1 - (double)promocode.Discount / 100));
+                    updateSumWithAccessories(_sumAccessoriesWithDiscount);
 
-                    updateSumProducts(_sumProd);
+                    lblSumProducts.Font = new Font(lblSumProducts.Font, FontStyle.Strikeout);
                     lblDiscountAmonut.Text = promocode.Discount.ToString();
+
                     MessageBox.Show("Промокод применён");
 
                     return;

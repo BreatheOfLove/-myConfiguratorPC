@@ -35,7 +35,7 @@
             // 
             // txtBoxPromocode
             // 
-            txtBoxPromocode.Location = new Point(268, 57);
+            txtBoxPromocode.Location = new Point(318, 109);
             txtBoxPromocode.Name = "txtBoxPromocode";
             txtBoxPromocode.PlaceholderText = "Промокод";
             txtBoxPromocode.Size = new Size(146, 23);
@@ -47,14 +47,14 @@
             cmbBoxDiscoutAmount.FormatString = "%";
             cmbBoxDiscoutAmount.FormattingEnabled = true;
             cmbBoxDiscoutAmount.Items.AddRange(new object[] { "5", "10", "15", "20", "25", "50", "75", "100" });
-            cmbBoxDiscoutAmount.Location = new Point(268, 86);
+            cmbBoxDiscoutAmount.Location = new Point(318, 138);
             cmbBoxDiscoutAmount.Name = "cmbBoxDiscoutAmount";
             cmbBoxDiscoutAmount.Size = new Size(146, 23);
             cmbBoxDiscoutAmount.TabIndex = 1;
             // 
             // btnAddNewPromocode
             // 
-            btnAddNewPromocode.Location = new Point(268, 115);
+            btnAddNewPromocode.Location = new Point(318, 167);
             btnAddNewPromocode.Name = "btnAddNewPromocode";
             btnAddNewPromocode.Size = new Size(146, 23);
             btnAddNewPromocode.TabIndex = 2;

@@ -39,6 +39,7 @@
             lblTextDiscount = new Label();
             lblDiscountAmonut = new Label();
             lblTextProcent = new Label();
+            lblSumProductsWithDiscount = new Label();
             SuspendLayout();
             // 
             // listBoxShopCart
@@ -73,7 +74,7 @@
             // lblTextSumProd
             // 
             lblTextSumProd.AutoSize = true;
-            lblTextSumProd.Location = new Point(582, 357);
+            lblTextSumProd.Location = new Point(537, 357);
             lblTextSumProd.Name = "lblTextSumProd";
             lblTextSumProd.Size = new Size(99, 15);
             lblTextSumProd.TabIndex = 5;
@@ -82,7 +83,8 @@
             // lblSumProducts
             // 
             lblSumProducts.AutoSize = true;
-            lblSumProducts.Location = new Point(687, 357);
+            lblSumProducts.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            lblSumProducts.Location = new Point(642, 357);
             lblSumProducts.Name = "lblSumProducts";
             lblSumProducts.Size = new Size(13, 15);
             lblSumProducts.TabIndex = 4;
@@ -100,7 +102,7 @@
             // 
             // btnInputPromocode
             // 
-            btnInputPromocode.Location = new Point(68, 378);
+            btnInputPromocode.Location = new Point(67, 377);
             btnInputPromocode.Name = "btnInputPromocode";
             btnInputPromocode.Size = new Size(187, 23);
             btnInputPromocode.TabIndex = 7;
@@ -110,7 +112,7 @@
             // 
             // txtBoxPromocode
             // 
-            txtBoxPromocode.Location = new Point(68, 349);
+            txtBoxPromocode.Location = new Point(67, 348);
             txtBoxPromocode.Name = "txtBoxPromocode";
             txtBoxPromocode.PlaceholderText = "Промокод";
             txtBoxPromocode.Size = new Size(187, 23);
@@ -119,7 +121,7 @@
             // lblTextDiscount
             // 
             lblTextDiscount.AutoSize = true;
-            lblTextDiscount.Location = new Point(582, 385);
+            lblTextDiscount.Location = new Point(537, 385);
             lblTextDiscount.Name = "lblTextDiscount";
             lblTextDiscount.Size = new Size(80, 15);
             lblTextDiscount.TabIndex = 10;
@@ -128,7 +130,7 @@
             // lblDiscountAmonut
             // 
             lblDiscountAmonut.AutoSize = true;
-            lblDiscountAmonut.Location = new Point(668, 385);
+            lblDiscountAmonut.Location = new Point(623, 385);
             lblDiscountAmonut.Name = "lblDiscountAmonut";
             lblDiscountAmonut.Size = new Size(13, 15);
             lblDiscountAmonut.TabIndex = 9;
@@ -137,17 +139,26 @@
             // lblTextProcent
             // 
             lblTextProcent.AutoSize = true;
-            lblTextProcent.Location = new Point(683, 385);
+            lblTextProcent.Location = new Point(638, 385);
             lblTextProcent.Name = "lblTextProcent";
             lblTextProcent.Size = new Size(17, 15);
             lblTextProcent.TabIndex = 11;
             lblTextProcent.Text = "%";
+            // 
+            // lblSumProductsWithDiscount
+            // 
+            lblSumProductsWithDiscount.AutoSize = true;
+            lblSumProductsWithDiscount.Location = new Point(625, 372);
+            lblSumProductsWithDiscount.Name = "lblSumProductsWithDiscount";
+            lblSumProductsWithDiscount.Size = new Size(0, 15);
+            lblSumProductsWithDiscount.TabIndex = 12;
             // 
             // FormShopCart
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(lblSumProductsWithDiscount);
             Controls.Add(lblTextProcent);
             Controls.Add(lblTextDiscount);
             Controls.Add(lblDiscountAmonut);
@@ -178,5 +189,6 @@
         private Label lblTextDiscount;
         private Label lblDiscountAmonut;
         private Label lblTextProcent;
+        private Label lblSumProductsWithDiscount;
     }
 }

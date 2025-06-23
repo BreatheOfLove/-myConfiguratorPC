@@ -56,9 +56,9 @@
             // 
             // pictureBoxQRCodePay
             // 
-            pictureBoxQRCodePay.Location = new Point(49, 35);
+            pictureBoxQRCodePay.Location = new Point(23, 35);
             pictureBoxQRCodePay.Name = "pictureBoxQRCodePay";
-            pictureBoxQRCodePay.Size = new Size(676, 282);
+            pictureBoxQRCodePay.Size = new Size(740, 282);
             pictureBoxQRCodePay.TabIndex = 2;
             pictureBoxQRCodePay.TabStop = false;
             // 

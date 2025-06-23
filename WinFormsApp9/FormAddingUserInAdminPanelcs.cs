@@ -29,9 +29,12 @@ namespace WinFormsApp9
             string password = txtBoxInputPassword.Text;
             string city = comboBoxCity.SelectedItem.ToString();
             bool isAdmin = cmbBoxIsAdmin.SelectedItem.ToString() == "Администратор" ? true : false;
+
             if (userName != string.Empty && password != string.Empty && city != string.Empty)
             {
-                User newUser = new User(userName, password, city, isAdmin);
+                List<Accessories> purchaseHistory = new List<Accessories>();
+
+                User newUser = new User(userName, password, city, isAdmin, purchaseHistory);
                 AddingUser.addNewUser(newUser, ref _userList, _filePath);
             }
             else

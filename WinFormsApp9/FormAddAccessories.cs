@@ -16,15 +16,15 @@ namespace WinFormsApp9
 {
     public partial class FormAddAccessories : Form
     {
-        List<Product> _products = new List<Product>();
-        string _filePathListProd = "";
+        List<Accessories> _accessories = new List<Accessories>();
+        string _filePathListAccesories = "";
 
-        public FormAddAccessories(List<Product> products, string filePathListProd)
+        public FormAddAccessories(List<Accessories> accessories, string filePathListAccesories)
         {
             InitializeComponent();
 
-            _products = products;
-            _filePathListProd = filePathListProd;
+            _accessories = accessories;
+            _filePathListAccesories = filePathListAccesories;
         }
 
         private void btnAddProd_Click(object sender, EventArgs e)
@@ -39,10 +39,10 @@ namespace WinFormsApp9
 
                 int price = int.Parse(txtBoxProdPrice.Text);
 
-                Product product = new Product(type, name, description, price);
-                _products.Add(product);
-                string json = JsonSerializer.Serialize(_products, new JsonSerializerOptions { WriteIndented = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping});
-                File.WriteAllText(_filePathListProd, json);
+                Accessories accessorie = new Accessories(type, name, description, price);
+                _accessories.Add(accessorie);
+                string json = JsonSerializer.Serialize(_accessories, new JsonSerializerOptions { WriteIndented = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping });
+                File.WriteAllText(_filePathListAccesories, json);
 
                 MessageBox.Show("Компонент добавлен");
             }

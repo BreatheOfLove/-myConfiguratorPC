@@ -13,48 +13,67 @@ namespace WinFormsApp9
 {
     public partial class FormMainUser : Form
     {
-        List<Product> _products = new List<Product>();
+        string _filePathListUsers = "";
+        List<User> _users = new List<User>();
+
+        List<Accessories> _accessories = new List<Accessories>();
         string _filePathListProd = "";
 
-        List<Product> _ShopCartProduct = new List<Product>();
+        List<Accessories> _ShopCartProduct = new List<Accessories>();
         int _sumProduct = 0;
 
         List<Promocode> _promocodes = new List<Promocode>();
         string _filePathListPromocodes = "";
 
-        public FormMainUser(string userName, string userCity, string weather, List<Product> products, string filePathListProd, List<Promocode> promocodes, string filePathListPromocodes)
+        User _user;
+
+        public FormMainUser(User user,List<User> users, string filePathListUsers, string weather, List<Accessories> products, string filePathListProd, List<Promocode> promocodes, string filePathListPromocodes)
         {
             InitializeComponent();
             pictureBoxBackground.Image = System.Drawing.Image.FromFile(@"Data\yae.jpg");
             pictureBoxBackground.SizeMode = PictureBoxSizeMode.Zoom;
 
-            lblLoginUser.Text = userName;
+            lblLoginUser.Text = user.Name;
 
-            _products = products;
+            _user = user;
+
+            _users = users;
+            _filePathListUsers = filePathListUsers;
+
+            _accessories = products;
             _filePathListProd = filePathListProd;
 
             _promocodes = promocodes;
             _filePathListPromocodes = filePathListPromocodes;
 
-            lblTextWeaher.Text = $"В {userCity}е сейчас {weather}°";
+
+            lblTextWeaher.Text = $"В {user.City} сейчас {weather}°";
         }
 
         private void btnOpenListProducts_Click(object sender, EventArgs e)
         {
-            FormUserListProduct formUserListProduct = new FormUserListProduct(_products);
+            FormUserListProduct formUserListProduct = new FormUserListProduct(_accessories);
             formUserListProduct.ShowDialog();
 
-            List<Product> selectedProducts = formUserListProduct.getShopCartProducts();
+            List<Accessories> selectedAccessories = formUserListProduct.getShopCartProducts();
             int addedSum = formUserListProduct.getSumProducts();
 
-            _ShopCartProduct.AddRange(selectedProducts);
+            _ShopCartProduct.AddRange(selectedAccessories);
             _sumProduct += addedSum;
         }
 
         private void btnInputShopCart_Click(object sender, EventArgs e)
         {
-            FormShopCart formShopCart = new FormShopCart(_ShopCartProduct, _sumProduct, _promocodes, _filePathListPromocodes);
+            FormShopCart formShopCart = new FormShopCart(_user,_users, _filePathListUsers , _ShopCartProduct, _sumProduct, _promocodes, _filePathListPromocodes);
             formShopCart.ShowDialog();
+
+            _sumProduct = formShopCart.getSumShopCarts();
+        }
+
+        private void btnOpenListPurchaseHistory_Click(object sender, EventArgs e)
+        {
+            FormPurchaseHistory formPurchaseHistory = new FormPurchaseHistory(_user.Purchases);
+            formPurchaseHistory.ShowDialog();
         }
     }
 }

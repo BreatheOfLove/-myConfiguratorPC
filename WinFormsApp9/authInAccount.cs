@@ -8,8 +8,10 @@ using System.Security.Cryptography;
 
 namespace WinFormsApp9
 {
+    // Password hashing class 
     internal class hashPass
     {
+
         public static string GetHashSHA256(string plainText)
         {
             using (SHA256 hash = SHA256.Create())
@@ -30,20 +32,16 @@ namespace WinFormsApp9
 
     internal class authInAccount
     {
-        static public bool isAuthInAccount(string userName, string userPassword, out string city, out bool isAdmin, ref List<User> users)
+        public static User isAuthInAccount(string userName, string userPassword, ref List<User> users)
         {
-            city = "";
-            isAdmin = false;
             foreach (User user in users)
             {
                 if (userName == user.Name && user.PasswordHash == hashPass.GetHashSHA256(userPassword))
                 {
-                    isAdmin = user.IsAdmin;
-                    city = user.City;
-                    return true;
+                    return user;
                 }
             }
-            return false;
+            return null;
         }
     }
 

@@ -28,22 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAuthorization));
             btnEnterAccount = new Button();
             txtBoxInputPassword = new TextBox();
             txtBoxInputLogin = new TextBox();
             cmbBoxSelectionAuthorization = new ComboBox();
-            imageList1 = new ImageList(components);
             pictureBoxBackground = new PictureBox();
+            comboBoxCity = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)pictureBoxBackground).BeginInit();
             SuspendLayout();
             // 
             // btnEnterAccount
             // 
-            btnEnterAccount.Location = new Point(371, 230);
+            btnEnterAccount.Location = new Point(296, 246);
             btnEnterAccount.Name = "btnEnterAccount";
-            btnEnterAccount.Size = new Size(121, 23);
+            btnEnterAccount.Size = new Size(154, 23);
             btnEnterAccount.TabIndex = 8;
             btnEnterAccount.Text = "Подтвердить";
             btnEnterAccount.UseVisualStyleBackColor = true;
@@ -51,20 +50,20 @@
             // 
             // txtBoxInputPassword
             // 
-            txtBoxInputPassword.Location = new Point(371, 201);
+            txtBoxInputPassword.Location = new Point(296, 188);
             txtBoxInputPassword.Name = "txtBoxInputPassword";
             txtBoxInputPassword.PlaceholderText = "Пароль";
-            txtBoxInputPassword.Size = new Size(121, 23);
+            txtBoxInputPassword.Size = new Size(154, 23);
             txtBoxInputPassword.TabIndex = 7;
             // 
             // txtBoxInputLogin
             // 
             txtBoxInputLogin.BackColor = SystemColors.Window;
             txtBoxInputLogin.ForeColor = SystemColors.WindowText;
-            txtBoxInputLogin.Location = new Point(371, 172);
+            txtBoxInputLogin.Location = new Point(296, 159);
             txtBoxInputLogin.Name = "txtBoxInputLogin";
             txtBoxInputLogin.PlaceholderText = "Логин";
-            txtBoxInputLogin.Size = new Size(121, 23);
+            txtBoxInputLogin.Size = new Size(154, 23);
             txtBoxInputLogin.TabIndex = 6;
             // 
             // cmbBoxSelectionAuthorization
@@ -72,30 +71,38 @@
             cmbBoxSelectionAuthorization.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbBoxSelectionAuthorization.FormattingEnabled = true;
             cmbBoxSelectionAuthorization.Items.AddRange(new object[] { "Вход", "Регистрация" });
-            cmbBoxSelectionAuthorization.Location = new Point(371, 143);
+            cmbBoxSelectionAuthorization.Location = new Point(296, 130);
             cmbBoxSelectionAuthorization.Name = "cmbBoxSelectionAuthorization";
-            cmbBoxSelectionAuthorization.Size = new Size(121, 23);
+            cmbBoxSelectionAuthorization.Size = new Size(154, 23);
             cmbBoxSelectionAuthorization.TabIndex = 11;
-            // 
-            // imageList1
-            // 
-            imageList1.ColorDepth = ColorDepth.Depth32Bit;
-            imageList1.ImageSize = new Size(16, 16);
-            imageList1.TransparentColor = Color.Transparent;
+            cmbBoxSelectionAuthorization.SelectedIndexChanged += cmbBoxSelectionAuthorization_SelectedIndexChanged;
             // 
             // pictureBoxBackground
             // 
-            pictureBoxBackground.Location = new Point(0, 0);
+            pictureBoxBackground.Location = new Point(-1, -6);
             pictureBoxBackground.Name = "pictureBoxBackground";
-            pictureBoxBackground.Size = new Size(915, 539);
+            pictureBoxBackground.Size = new Size(798, 454);
             pictureBoxBackground.TabIndex = 12;
             pictureBoxBackground.TabStop = false;
+            // 
+            // comboBoxCity
+            // 
+            comboBoxCity.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxCity.FormattingEnabled = true;
+            comboBoxCity.Items.AddRange(new object[] { "Москва", "Санкт-Петербург", "Екатеринбург", "Новосибирск", "Красноярск", "Сочи", "Краснодар", "Симферополь" });
+            comboBoxCity.Location = new Point(296, 217);
+            comboBoxCity.Name = "comboBoxCity";
+            comboBoxCity.Size = new Size(154, 23);
+            comboBoxCity.TabIndex = 13;
+            comboBoxCity.Tag = "";
+            comboBoxCity.Visible = false;
             // 
             // FormAuthorization
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(917, 539);
+            ClientSize = new Size(796, 446);
+            Controls.Add(comboBoxCity);
             Controls.Add(cmbBoxSelectionAuthorization);
             Controls.Add(btnEnterAccount);
             Controls.Add(txtBoxInputPassword);
@@ -106,7 +113,6 @@
             MaximizeBox = false;
             Name = "FormAuthorization";
             Text = "Авторизация";
-            Load += FormAuthorization_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBoxBackground).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -117,7 +123,7 @@
         private TextBox txtBoxInputPassword;
         private TextBox txtBoxInputLogin;
         private ComboBox cmbBoxSelectionAuthorization;
-        private ImageList imageList1;
         private PictureBox pictureBoxBackground;
+        private ComboBox comboBoxCity;
     }
 }
